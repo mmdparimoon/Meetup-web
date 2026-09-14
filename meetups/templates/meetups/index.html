@@ -1,0 +1,27 @@
+{% extends "meetups/base/base.html" %}
+{% load static %}
+
+{% block title %}All Meetups{% endblock title %}
+{% block css_files %} <link rel="stylesheet" href="{% static "meetups/styles/all-meetups.css" %}">{% endblock css_files %}
+    
+
+
+    {% block main_heading %}WE got great meetups coming up!{% endblock main_heading %}
+    {% block header_content %}<p>Find the best Django meetups in your area!</p>{% endblock header_content %}
+    <main>
+        {% block body %}
+         {% if show_meetups %}
+        <section>
+            <h2>Up coming meetups!</h2>
+                <ol> 
+                    {% for meetup in meetups %}
+                    {% include "meetups/include/meetup-item.html" with title=meetup.title location=meetup.location image=meetup.image.url slug=meetup.slug %}
+                            {% endfor %}
+                </ol>
+
+        </section>
+    </main>
+    {% else %}
+        <p>No meetups available.</p>
+    {% endif %}
+        {% endblock body %}
